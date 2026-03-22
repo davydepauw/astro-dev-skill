@@ -105,6 +105,27 @@ import { render } from 'astro:content'
 const { Content } = await render(post)
 ```
 
+**5. Integration plugins run before your remarkPlugins:**
+Astro integrations **prepend** their remark/rehype plugins via `astro:config:setup`. Your `markdown.remarkPlugins` run **after** integration plugins, not before.
+
+To run a remark plugin before an integration (e.g., intercepting code blocks before a syntax highlighter processes them), create your own Astro integration that prepends to the existing plugin list:
+```ts
+export function myIntegration(): AstroIntegration {
+  return {
+    name: 'my-plugin',
+    hooks: {
+      'astro:config:setup': ({ config, updateConfig }) => {
+        const existing = [...(config.markdown?.remarkPlugins || [])]
+        updateConfig({
+          markdown: { remarkPlugins: [myRemarkPlugin, ...existing] },
+        })
+      },
+    },
+  }
+}
+```
+Place it **after** the target integration in the `integrations[]` array — it reads the current list (which already includes the target's plugins) and prepends yours before them.
+
 ---
 
 ## Common Integration Stack
