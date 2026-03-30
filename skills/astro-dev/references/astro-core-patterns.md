@@ -321,7 +321,6 @@ APIs that no longer exist. Agents frequently attempt to use these.
 |---------|-------------|
 | `Astro.glob()` | `getCollection()` from `astro:content` |
 | `Astro.fetchContent()` | `getCollection()` from `astro:content` |
-| `@astrojs/tailwind` integration | `@tailwindcss/vite` as Vite plugin |
 | `getEntryBySlug()` | `getEntry()` with full ID |
 | `entry.render()` method | `render(entry)` standalone function |
 | `entry.slug` | `entry.id` |
