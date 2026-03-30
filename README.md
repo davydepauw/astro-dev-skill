@@ -23,14 +23,6 @@ const posts = await Astro.glob('./posts/*.md')      const posts = await getColle
 z.string().email()                                  z.email()  // Zod 4
 ```
 
-```css
-/* What agents generate */                       /* What actually works (Tailwind v4) */
-@tailwind base;                                  @import "tailwindcss";
-@tailwind components;                            @theme inline {
-@tailwind utilities;                               --color-primary: oklch(0.6 0.2 250);
-/* + tailwind.config.js */                       }
-```
-
 ---
 
 ## How this skill complements MCP
@@ -55,7 +47,6 @@ Patterns agents generate incorrectly. Each was identified from repeated failures
 | # | What agents do wrong | What the guardrail corrects |
 |---|---|---|
 | 1 | Collections without `loader` | Explicit `glob`/`file`/custom loader required |
-| 2 | `tailwind.config.js` | CSS-native `@theme inline` — no JS config |
 | 3 | `Astro.glob()` | `getCollection()` from `astro:content` |
 | 4 | `entry.render()` method | `render(entry)` standalone function |
 | 5 | Remark plugin ordering | Integration plugins prepend; must use `astro:config:setup` to run first |
@@ -98,11 +89,11 @@ Multi-concept patterns that require combining several features correctly:
 
 ### Reference files
 
-Core patterns, Tailwind v4, Content Collections, islands/hydration, Actions/forms, server features, and doc endpoint URLs. **Trimmed for gotchas only** — detailed API docs are deferred to MCP.
+Core patterns, Content Collections, islands/hydration, Actions/forms, server features, and doc endpoint URLs. **Trimmed for gotchas only** — detailed API docs are deferred to MCP.
 
 ### Templates
 
-Drop-in config files for Astro 6 + Tailwind v4 + MDX + Fonts API + Content Collections (Zod 4).
+Drop-in config files for Astro 6 + MDX + Fonts API + Content Collections (Zod 4).
 
 ---
 
@@ -111,8 +102,8 @@ Drop-in config files for Astro 6 + Tailwind v4 + MDX + Fonts API + Content Colle
 ### Skills CLI
 
 ```bash
-npx skills add gigio1023/astro-dev-skill      # project
-npx skills add gigio1023/astro-dev-skill -g    # global
+npx skills add davydepauw/astro-dev-skill      # project
+npx skills add davydepauw/astro-dev-skill -g    # global
 ```
 
 ### Manual
@@ -161,15 +152,14 @@ skills/astro-dev/
 │   ├── astro-core-patterns.md      # Core APIs, styles, scripts, middleware, adapters
 │   ├── content-collections.md      # Loaders, schemas, querying, Zod 4, live collections
 │   ├── blog-recipes.md             # RSS, pagination, tags, SEO, Shiki, MDX, TOC, reading time
-│   ├── tailwind.md                 # Vite plugin, CSS theming, dark mode, fonts
 │   ├── islands-and-hydration.md    # Client directives, nanostores, server islands
 │   ├── actions-and-forms.md        # Actions API, Zod 4 validation, Actions vs API routes
 │   ├── server-features.md          # Prerender, sessions, astro:env, i18n, CSP, Cloudflare
 │   └── doc-endpoints.md            # MCP config, LLM doc URLs, fallback strategy
 └── templates/
-    ├── astro.config.ts             # Astro 6 + Tailwind v4 + Fonts API
+    ├── astro.config.ts             # Astro 6 + Fonts API
     ├── content.config.ts           # Content Collections (Zod 4)
-    └── global.css                  # Tailwind v4 entry point
+    └── global.css                 # CSS entry point
 ```
 
 ## License
